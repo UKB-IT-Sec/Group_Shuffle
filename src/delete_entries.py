@@ -58,6 +58,8 @@ if __name__ == '__main__':
     args = setup_argparser()
     
     original_list = get_string_list_from_file(args.original_file)
+    print('Items in original list: {}'.format(len(original_list)))
+
     original_list = remove_duplicates_in_list(original_list)
     
     blacklist = get_string_list_from_file(args.blacklist_file)
@@ -68,5 +70,6 @@ if __name__ == '__main__':
             cleaned_list.append(entry)
 
     write_list_to_file(cleaned_list, args.output_file)
+    print('Items in cleaned list: {}'.format(len(cleaned_list)))
     
     sys.exit(0)
