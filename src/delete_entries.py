@@ -18,6 +18,8 @@
 import argparse
 import sys
 
+from helper.file_operation import get_string_list_from_file, write_list_to_file
+
 PROGRAM_NAME = 'Group Shuffle - Delete Entries'
 PROGRAM_VERSION = '0.1'
 PROGRAM_DESCRIPTION = 'Delete double entries'
@@ -33,25 +35,17 @@ def setup_argparser():
     return parser.parse_args() 
 
 
-def get_string_list_from_file(file_path):
-    try:
-        with open(file_path) as source_file:
-            lines = source_file.readlines()
-    except Exception as e:
-        sys.exit('Could not extract data from file: {} {}'.format(sys.exc_info()[0].__name__, e))
-    return lines
-
-def write_list_to_file(input_list, file_path):
-    try:
-        with open(file_path, mode='w') as output_file:
-            output_file.writelines(input_list)
-    except Exception as e:
-        sys.exit('Could not write data to file: {} {}'.format(sys.exc_info()[0].__name__, e))
-
-
 def remove_duplicates_in_list(input_list):
     return list(set(input_list))
 
+
+def apply_blacklist(original_list, blacklist):
+    cleaned_list = list()
+    for entry in original_list:
+        if entry not in blacklist:
+            cleaned_list.append(entry)
+    return cleaned_list
+    
 
 if __name__ == '__main__':
     
@@ -64,10 +58,7 @@ if __name__ == '__main__':
     
     blacklist = get_string_list_from_file(args.blacklist_file)
     
-    cleaned_list = list()
-    for entry in original_list:
-        if entry not in blacklist:
-            cleaned_list.append(entry)
+    cleaned_list = apply_blacklist(original_list, blacklist)
 
     write_list_to_file(cleaned_list, args.output_file)
     print('Items in cleaned list: {}'.format(len(cleaned_list)))
