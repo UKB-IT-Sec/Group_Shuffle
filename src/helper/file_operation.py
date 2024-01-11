@@ -22,7 +22,7 @@ def get_string_list_from_file(file_path):
         with open(file_path) as source_file:
             lines = source_file.readlines()
     except Exception as e:
-        sys.exit('Could not extract data from file: {} {}'.format(sys.exc_info()[0].__name__, e))
+        sys.exit('Could not extract data from file: {}\nErrormessage: {} {}'.format(file_path, sys.exc_info()[0].__name__, e))
     return lines
 
 
