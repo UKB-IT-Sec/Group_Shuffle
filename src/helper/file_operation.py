@@ -31,4 +31,8 @@ def write_list_to_file(input_list, file_path):
         with open(file_path, mode='w') as output_file:
             output_file.writelines(input_list)
     except Exception as e:
-        sys.exit('Could not write data to file: {} {}'.format(sys.exc_info()[0].__name__, e))
+        sys.exit('Could not write data to file: {}\n Errormessage: {} {}'.format(file_path, sys.exc_info()[0].__name__, e))
+        
+
+def get_file_name_without_ending(file_path):
+    return file_path.stem

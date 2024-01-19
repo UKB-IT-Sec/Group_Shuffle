@@ -33,7 +33,7 @@ def setup_argparser():
     parser.add_argument('-w', '--whitelist_string_filter', default=None, help='delete all entries not containing this string')
     parser.add_argument('-V', '--version', action='version', version='{} {}'.format(PROGRAM_NAME, PROGRAM_VERSION))
     parser.add_argument('-d', '--debug', action='store_true', default=False, help='print debug messages and show browser')
-    return parser.parse_args() 
+    return parser.parse_args()
 
 
 def remove_duplicates_in_list(input_list):
