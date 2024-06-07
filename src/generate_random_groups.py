@@ -52,13 +52,13 @@ if __name__ == '__main__':
     input_list = get_string_list_from_file(args.input_file)
     output_list = remove_duplicates_in_list(input_list)
     shuffle(output_list)
-    
+
     total_number_of_entries = len(output_list)
     group_size = (int)(total_number_of_entries / args.number_of_groups)
 
     generate_output_path(args.output_path)
     generate_output_files(args.number_of_groups, group_size, output_list, args.output_path)
-    
+
     print(str(args.number_of_groups) + " random groups of " + str(group_size) + " colleagues each have been generated.")
 
     sys.exit(0)

@@ -46,7 +46,7 @@ def apply_blacklist(original_list, blacklist):
         if entry not in blacklist:
             cleaned_list.append(entry)
     return cleaned_list
-    
+
 
 def apply_whitelist_string_filter(original_list, filter_string):
     cleaned_list = list()
@@ -57,22 +57,21 @@ def apply_whitelist_string_filter(original_list, filter_string):
 
 
 if __name__ == '__main__':
-    
     args = setup_argparser()
-    
+
     original_list = get_string_list_from_file(args.original_file)
     print('Items in original list: {}'.format(len(original_list)))
 
     tmp_list = remove_duplicates_in_list(original_list)
-    
+
     if args.blacklist_file:
         blacklist = get_string_list_from_file(args.blacklist_file)
         tmp_list = apply_blacklist(tmp_list, blacklist)
-        
+
     if args.whitelist_string_filter:
         tmp_list = apply_whitelist_string_filter(tmp_list, args.whitelist_string_filter)
 
     write_list_to_file(tmp_list, args.output_file)
     print('Items in cleaned list: {}'.format(len(tmp_list)))
-    
+
     sys.exit(0)

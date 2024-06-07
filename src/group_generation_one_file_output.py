@@ -56,12 +56,12 @@ def get_shuffled_groups_from_file(file_path, number_of_groups):
     group_size = len(original_entries)
     group_name = get_file_name_without_ending(file_path)
     sub_group_size = int(len(original_entries) / number_of_groups)
-    
+
     for group_id in range(number_of_groups):
         sub_group_name = '{}_msg-{}'.format(group_name, group_id+1)
         for user_index in range(sub_group_size):
             current_user = original_entries.pop()
-            result.append(correct_form(current_user,sub_group_name))
+            result.append(correct_form(current_user, sub_group_name))
     print('group: {}; members: {}; sub-group-size: {}; members ignored: {}'.format(
         group_name,
         group_size,
@@ -69,19 +69,19 @@ def get_shuffled_groups_from_file(file_path, number_of_groups):
         len(original_entries)))
     return result
 
-    
+
 
 if __name__ == '__main__':
-    
+
     args = setup_argparser()
-    
+
     original_files = get_specific_files_in_dir(args.original_file_folder, filter_pattern='*.csv')
-    
+
     all_entries = list()
-    
+
     for current_file in original_files:
         all_entries.extend(get_shuffled_groups_from_file(current_file, args.number_of_groups))
-        
+
     write_list_to_file(all_entries, args.output_file)
 
     sys.exit(0)

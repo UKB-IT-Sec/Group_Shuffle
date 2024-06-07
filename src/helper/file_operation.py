@@ -15,6 +15,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 import sys
+import os
 
 
 def get_string_list_from_file(file_path):
@@ -32,7 +33,11 @@ def write_list_to_file(input_list, file_path):
             output_file.writelines(input_list)
     except Exception as e:
         sys.exit('Could not write data to file: {}\n Errormessage: {} {}'.format(file_path, sys.exc_info()[0].__name__, e))
-        
+
 
 def get_file_name_without_ending(file_path):
     return file_path.stem
+
+
+def create_directory(directory_path):
+    os.makedirs(directory_path, exist_ok=True)
